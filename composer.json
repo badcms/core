@@ -1,0 +1,23 @@
+{
+  "name": "badcms/core",
+  "type": "library",
+  "keywords": ["sample","study","badcms","php"],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "BadCoder",
+      "email": "badphpcms@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "BadCMS\\": "src/"
+    },
+    "files": [
+      "helpers/helpers.php"
+    ]
+  },
+  "require": {
+    "ext-json": "*"
+  }
+}
