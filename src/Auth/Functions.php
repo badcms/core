@@ -9,6 +9,7 @@ class Functions
 
 use function BadCMS\Application\app;
 use function BadCMS\Http\redirect;
+use function BadCMS\Models\User\findUser;
 use function BadCMS\Router\route;
 
 [
@@ -27,7 +28,13 @@ function guest()
 
 function check()
 {
-    $request = app("request")(["user" => isset($_SESSION[SESSION_USER_KEY]) ? unserialize($_SESSION[SESSION_USER_KEY]) : null]);
+    $user = (isset($_SESSION[SESSION_USER_KEY]) ? unserialize($_SESSION[SESSION_USER_KEY]) : null);
+
+    if (!findUser($user['username'])) {
+        unset($_SESSION[SESSION_USER_KEY], $user);
+    }
+
+    $request = app("request")(compact('user'));
 
     return $request['user'] ?? false;
 }
@@ -94,5 +101,5 @@ function attempt($user, $password)
 function hashPassword($password)
 {
     return password_hash($password, config("auth.hash", PASSWORD_DEFAULT),
-        ['salt' => config("auth.secret"), "cost" => config("auth.cost", 10)]);
+        ["cost" => config("auth.cost", 10)]);
 }
