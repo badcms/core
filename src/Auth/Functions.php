@@ -30,8 +30,9 @@ function check()
 {
     $user = (isset($_SESSION[SESSION_USER_KEY]) ? unserialize($_SESSION[SESSION_USER_KEY]) : null);
 
-    if (!findUser($user['username'])) {
-        unset($_SESSION[SESSION_USER_KEY], $user);
+    if ($user && !findUser($user['username'])) {
+        unset($_SESSION[SESSION_USER_KEY]);
+        $user = null;
     }
 
     $request = app("request")(compact('user'));

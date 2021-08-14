@@ -120,7 +120,7 @@ function getRouteParams($route)
  * @param  null    $callback  Callback for route
  * @param  null    $name      name of route
  */
-function addRoute($prefix, $callback = null, $name = null)
+function addRoute(string $prefix, $callback = null, $name = null)
 {
     if ($prefix[0] != '/') {
         $prefix = "/".$prefix;
@@ -147,7 +147,7 @@ function addRoute($prefix, $callback = null, $name = null)
 
     $route['name'] = $name ?? $prefix;
 
-    $app = &app();
+    $app = app();
     $app["router"]["addRoute"]($route);
 
     return $route;
