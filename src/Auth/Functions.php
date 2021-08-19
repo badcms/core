@@ -53,11 +53,12 @@ function login($request)
     if ($isLoggedIn) {
         $_SESSION[SESSION_USER_KEY] = serialize($user);
         app("user", $user);
-
         flash("message", "Hello, $username");
-        session_commit();
-        redirect(route('index'));
+    } else {
+        // Сообщение пользователю
+        flash("error", "Invalid username or password");
     }
+    session_commit();
 
     return $isLoggedIn;
 }
