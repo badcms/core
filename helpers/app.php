@@ -14,22 +14,25 @@ if (!function_exists('value')) {
     }
 }
 
-/**
- * Получить из конфига значение
- *
+if (!function_exists('config')) {
+    /**
+     * Получить из конфига значение
+     *
  * @param        $key
  * @param  null  $default
  *
  * @return array|ArrayAccess|mixed
  */
 function config($key, $default = null)
-{
-    return array_dot_get(\BadCMS\Application\app("config"), $key, $default);
+    {
+        return array_dot_get(\BadCMS\Application\app("config"), $key, $default);
+    }
 }
 
-/**
- * Dump & Die
- *
+if (!function_exists('dd')) {
+    /**
+     * Dump & Die
+     *
  * @param  mixed  ...$data
  */
 function dd(...$data)
@@ -37,13 +40,15 @@ function dd(...$data)
     echo "<pre>";
     foreach ($data as $item) {
         var_dump($item);
+        }
+        die();
     }
-    die();
 }
 
-/**
- * Check if provided string is valid JSON
- *
+if (!function_exists('isValidJSON')) {
+    /**
+     * Check if provided string is valid JSON
+     *
  * @param $str
  *
  * @return bool
@@ -52,5 +57,7 @@ function isValidJSON($str)
 {
     json_decode($str);
 
-    return json_last_error() == JSON_ERROR_NONE;
+        return json_last_error() == JSON_ERROR_NONE;
+    }
 }
+
